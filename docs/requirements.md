@@ -91,7 +91,9 @@ placed → accepted → preparing → ready → completed
 
 ### Deferred (not MVP)
 
-Online payments, delivery, inventory, suppliers, expenses, reservations, analytics, push notifications, receipt printing. Recorded so that the MVP design does not preclude them; none is committed.
+Delivery, inventory, suppliers, expenses, reservations, analytics, push notifications, receipt printing. Recorded so that the MVP design does not preclude them; none is committed.
+
+Payments are **no longer deferred**: Ethiopian wallets and banks are implemented as transfer-and-verify (customer pays from their own app, staff match the transaction number). A payment provider integration remains open; see [decisions](decisions.md#open-questions).
 
 ## Non-functional requirements
 

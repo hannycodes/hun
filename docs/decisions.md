@@ -124,7 +124,7 @@ Each is a decision that needs confirmation before or during the milestone shown.
 | 8 | Hosting provider, region and environments; data-residency obligations in target markets | M6 |
 | 9 | Retention of guest order data and customer contact details | M6 |
 | 10 | How are menu images stored and served? | M2 |
-| 11 | Payments: which provider and flow, and when? | After M6 |
+| 11 | Payments: which provider and API, and when? (The transfer-and-verify flow is already implemented; only the provider integration is open) | After M6 |
 | 12 | Commercial model and pricing (subscription, per-order, other) | Before pilot |
 | 13 | Which segment and market first (cafés, small restaurants, other), and how will that be validated with real restaurants? | Before M6 |
 | 14 | Licence and ownership model for the repository (open, source-available, private) | M0 |
