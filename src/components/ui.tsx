@@ -239,14 +239,14 @@ export function SiteHeader({ floating = false }: { floating?: boolean }) {
  * The footer is the darkest surface on the page, so the section above it can
  * stay light. Shared by every public page.
  */
-export function SiteFooter() {
+export function SiteFooter({ className = '' }: { className?: string }) {
   return (
-    <footer className="bg-plum text-paper">
+    <footer className={`bg-plum text-paper ${className}`}>
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <Wordmark className="text-3xl" />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-baby/85">
-            A café on Bole Road, Addis Ababa. Coffee, chechebsa and pastry, made
+            A café on Addis Ababa. Coffee and pastries made
             here since 2026.
           </p>
           <p className="mt-6 text-[11px] uppercase tracking-[0.28em] text-baby/60">
@@ -257,10 +257,10 @@ export function SiteFooter() {
         <div>
           <p className="text-[11px] uppercase tracking-[0.3em] text-baby/60">Visit</p>
           <ul className="mt-4 space-y-2 text-sm text-baby/85">
-            <li>Bole Road, Addis Ababa</li>
+            <li>Addis Ababa</li>
             <li>Mon – Sun · 7:30 – 20:00</li>
-            <li>hello@hun.cafe</li>
-            <li>+251 91 000 0000</li>
+            <li>hello@hun.com</li>
+            <li>+251 904665110</li>
           </ul>
         </div>
 
@@ -274,16 +274,16 @@ export function SiteFooter() {
             </li>
             <li>
               <NavLink to="/signin" className="text-baby/85 transition hover:text-paper">
-                Staff sign in
+                Sign in
               </NavLink>
             </li>
             <li>
-              <a href="https://t.me/hun.cafe" className="text-baby/85 transition hover:text-paper">
+              <a href="https://t.me/just_hanny" className="text-baby/85 transition hover:text-paper">
                 Telegram
               </a>
             </li>
             <li>
-              <a href="https://instagram.com/hun.cafe" className="text-baby/85 transition hover:text-paper">
+              <a href="https://instagram.com/h_a_n_n_y_1" className="text-baby/85 transition hover:text-paper">
                 Instagram
               </a>
             </li>
@@ -293,7 +293,6 @@ export function SiteFooter() {
 
       <div className="mx-auto flex max-w-6xl flex-col gap-2 border-t border-paper/15 px-5 py-6 text-[11px] uppercase tracking-[0.2em] text-baby/55 sm:flex-row sm:items-center sm:justify-between sm:px-8">
         <span>© {new Date().getFullYear()} hun. café · Addis Ababa</span>
-        <span>Prices in Ethiopian Birr · All taxes included</span>
       </div>
     </footer>
   );

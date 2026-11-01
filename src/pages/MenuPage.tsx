@@ -60,7 +60,7 @@ export default function MenuPage() {
     bundle?.restaurant.status === 'active' && bundle.restaurant.ordering_enabled;
 
   return (
-    <div className="min-h-screen bg-paper pb-28">
+    <div className="min-h-screen bg-paper">
       <SiteHeader />
 
       {state === 'loading' && <Spinner label="Setting the table" />}
@@ -79,7 +79,7 @@ export default function MenuPage() {
           <section className="relative overflow-hidden border-b border-baby bg-[#fdf4f0]">
             <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-[1.2fr_0.8fr]">
               <div>
-                <SectionLabel>Bole · Addis Ababa</SectionLabel>
+                <SectionLabel>Addis Ababa</SectionLabel>
                 <h1 className="mt-5 font-display text-[clamp(2.6rem,6vw,4.4rem)]">
                   {bundle.restaurant.name}
                 </h1>
@@ -91,8 +91,6 @@ export default function MenuPage() {
                   <span>Open 7:30 — 20:00</span>
                   <span className="text-gold">·</span>
                   <span>Pickup or dine-in</span>
-                  <span className="text-gold">·</span>
-                  <span>Paid in Birr</span>
                 </div>
 
                 {!orderingOpen && (
@@ -139,7 +137,21 @@ export default function MenuPage() {
 
             {grouped.map(({ category, items }, index) => (
               <section key={category.id} id={`cat-${category.id}`} className="scroll-mt-40 pt-14">
-                <div className="grid gap-6 border-t border-baby pt-10 md:grid-cols-[240px_1fr] md:gap-12">
+                {/* Hairline rule with a small diamond: one quiet break between
+                    categories instead of another boxed panel. */}
+                <div className="flex items-center gap-4 pb-9">
+                  <span className="text-[10px] tracking-[0.32em] text-gold">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <span className="h-px flex-1 bg-gradient-to-r from-ink/20 to-transparent" />
+                  <span className="h-1.5 w-1.5 rotate-45 bg-gold/70" aria-hidden="true" />
+                  <span className="h-px flex-1 bg-gradient-to-l from-ink/20 to-transparent" />
+                  <span className="text-[10px] uppercase tracking-[0.28em] text-charcoal/50">
+                    {items.length} {items.length === 1 ? 'item' : 'items'}
+                  </span>
+                </div>
+
+                <div className="grid gap-6 md:grid-cols-[240px_1fr] md:gap-12">
                   <div>
                     <div className="h-[180px] overflow-hidden rounded-t-full rounded-b-[20px] bg-blush md:h-[220px]">
                       {category.image_url && (
@@ -151,10 +163,7 @@ export default function MenuPage() {
                         />
                       )}
                     </div>
-                    <p className="mt-4 text-[10px] uppercase tracking-[0.3em] text-gold">
-                      0{index + 1}
-                    </p>
-                    <h2 className="mt-2 font-display text-[30px] leading-tight">
+                    <h2 className="mt-5 font-display text-[30px] leading-tight">
                       {category.name}
                     </h2>
                     {category.tagline && (
@@ -171,11 +180,19 @@ export default function MenuPage() {
                       return (
                         <li
                           key={item.id}
-                          className="flex items-start justify-between gap-5 border-b border-baby py-6 first:pt-0 sm:gap-8"
+                          className="flex items-start gap-4 border-b border-baby py-5 first:pt-0 sm:gap-5"
                         >
-                          <div className="max-w-xl">
-                            <div className="flex flex-wrap items-baseline gap-3">
-                              <h3 className="font-display text-[21px] leading-snug">
+                          {item.image_url && (
+                            <img
+                              src={item.image_url}
+                              alt={item.name}
+                              loading="lazy"
+                              className="mt-1 h-16 w-16 shrink-0 rounded-full object-cover ring-1 ring-baby sm:h-[72px] sm:w-[72px]"
+                            />
+                          )}
+                          <div className="min-w-0 max-w-xl flex-1">
+                            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                              <h3 className="font-display text-[20px] leading-snug">
                                 {item.name}
                               </h3>
                               {item.featured && (
@@ -250,16 +267,17 @@ export default function MenuPage() {
                 Ordering hours
               </p>
               <p className="mt-3 font-display text-2xl">
-                Kitchen closes at 19:45. Coffee keeps going.
+                The kitchen closes at 19:45. The pastry case empties
+                earlier.
               </p>
               <p className="mt-2 text-[13px] text-charcoal">
-                Paid with Telebirr, CBE Birr, your bank or at the counter.
+                For any special cases talk to the staff at the counter.
               </p>
             </div>
           </main>
 
           <div className="mt-16">
-            <SiteFooter />
+            <SiteFooter className={count > 0 ? 'pb-24' : ''} />
           </div>
         </>
       )}

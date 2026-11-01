@@ -8,9 +8,9 @@ import { formatMinor } from '../lib/money';
 
 const BANNER = [
   'Ethiopian coffee',
-  'Baked this morning',
-  'Bole, Addis Ababa',
-  'Priced in Birr',
+  'Baked goods',
+  'Addis Ababa',
+  'Priced fairly',
   'Since 2026',
   'Pickup or dine in',
 ];
@@ -39,7 +39,7 @@ export default function LandingPage() {
   );
 
   return (
-    <div className="min-h-screen bg-paper pb-24">
+    <div className="min-h-screen bg-paper">
       <SiteHeader floating />
 
       {/* ------------------------------------------------------------------ */}
@@ -55,72 +55,70 @@ export default function LandingPage() {
           className="pointer-events-none absolute -right-24 bottom-0 h-[420px] w-[420px] rounded-full bg-blush blur-2xl"
         />
 
-        <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-5 pb-16 pt-32 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pb-24 lg:pt-40">
-          <div className="rise-in">
-            <SectionLabel>Bole Road · Addis Ababa · Since 2026</SectionLabel>
+        {/* The photograph and the text share one row, so the image ends
+            exactly on the hairline that closes the hero. */}
+        <div className="relative mx-auto max-w-6xl px-5 pt-24 sm:px-8 lg:pt-24">
+          <div className="grid items-stretch gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+            <div className="rise-in flex flex-col justify-center pb-2">
+              <SectionLabel>Addis Ababa · Since 2026</SectionLabel>
 
-            <h1 className="mt-7 font-display text-[clamp(2.9rem,7vw,5.4rem)] text-ink">
-              Coffee, chechebsa
-              <br />
-              and a table by the <span className="display-italic text-plum">window.</span>
-            </h1>
+              <h1 className="mt-6 font-display text-[clamp(2.7rem,6.4vw,4.9rem)] leading-[1.02] text-ink">
+                A café with
+                <br />
+                <span className="display-italic text-plum">a beautiful view.</span>
+              </h1>
 
-            <p className="mt-7 max-w-md text-[15px] leading-[1.75] text-charcoal">
-              hun. is a café in Bole, opened in 2026 by Hanan Seid. We grind
-              Ethiopian coffee when you order it, bake before the shutters go up,
-              and cook chechebsa until three in the afternoon. Sit in, take the
-              window, or order ahead and collect.
-            </p>
+              <p className="mt-6 max-w-md text-[15px] leading-[1.75] text-charcoal">
+                A small café in Addis Ababa, opened in 2026 by Hanan Seid. An adictive coffee with side of sweet or sour treats based on your likes.
+              </p>
 
-            <div className="mt-9 flex flex-wrap items-center gap-3">
-              <Link
-                to="/menu"
-                className="inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-[12px] font-medium uppercase tracking-[0.18em] text-paper transition hover:bg-plum"
-              >
-                See the menu
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-              <a
-                href="#story"
-                className="inline-flex items-center gap-2 rounded-full border border-ink/25 px-7 py-3.5 text-[12px] font-medium uppercase tracking-[0.18em] text-ink transition hover:border-ink hover:bg-white/60"
-              >
-                Read our story
-              </a>
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <Link
+                  to="/menu"
+                  className="inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-[12px] font-medium uppercase tracking-[0.18em] text-paper transition hover:bg-plum"
+                >
+                  See the menu
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+                <a
+                  href="#story"
+                  className="inline-flex items-center gap-2 rounded-full border border-ink/25 px-7 py-3.5 text-[12px] font-medium uppercase tracking-[0.18em] text-ink transition hover:border-ink hover:bg-white/60"
+                >
+                  Read our story
+                </a>
+              </div>
             </div>
 
-            <dl className="mt-12 flex flex-wrap gap-x-10 gap-y-5 border-t border-ink/10 pt-6">
-              {[
-                { label: 'Open daily', value: '7:30 — 20:00' },
-                { label: 'Service', value: 'Pickup & dine-in' },
-                { label: 'Address', value: 'Bole Road, Addis' },
-              ].map((item) => (
-                <div key={item.label}>
-                  <dt className="text-[10px] uppercase tracking-[0.26em] text-gold">
-                    {item.label}
-                  </dt>
-                  <dd className="mt-1.5 text-[13px] tracking-wide text-ink">
-                    {item.value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-
-          <div className="relative rise-in">
-            <div className="relative mx-auto h-[420px] w-full max-w-[400px] overflow-hidden rounded-t-full rounded-b-[36px] border border-white/60 shadow-[0_30px_80px_-40px_rgba(36,26,32,0.55)] sm:h-[540px] sm:max-w-[440px]">
+            <div className="relative rise-in h-[240px] overflow-hidden rounded-t-full rounded-b-[32px] border border-white/60 shadow-[0_30px_80px_-46px_rgba(36,26,32,0.5)] sm:h-[340px] lg:h-auto lg:min-h-[430px]">
               <img
-                src="/images/buna.jpg"
-                alt="A cup of Ethiopian coffee with a sprig of rue, on a wooden table at the café"
-                className="h-full w-full object-cover"
+                src="/images/hero.jpg"
+                alt="A marble table by the café window with a cappuccino, a croissant and a book in the morning light"
+                className="absolute inset-0 h-full w-full object-cover"
                 loading="eager"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-plum/30 via-transparent to-transparent" />
-            </div>
-
-            <div className="absolute -right-1 top-10 hidden rotate-90 text-[10px] uppercase tracking-[0.4em] text-charcoal/70 sm:block">
-              hun. café — Bole
+              <div className="absolute inset-0 bg-gradient-to-t from-plum/25 via-transparent to-transparent" />
+              <div className="absolute left-5 top-6 hidden text-[10px] uppercase tracking-[0.36em] text-black/90 drop-shadow sm:block">
+                Bole · Addis Ababa
+              </div>
             </div>
           </div>
+
+          <dl className="mt-0 flex flex-wrap gap-x-10 gap-y-5 border-t border-ink/12 pt-6 pb-14">
+            {[
+              { label: 'Open daily', value: '7:30 — 20:00' },
+              { label: 'Service', value: 'Pickup & dine-in' },
+              { label: 'Address', value: 'Addis Ababa' },
+            ].map((item) => (
+              <div key={item.label}>
+                <dt className="text-[10px] uppercase tracking-[0.26em] text-gold">
+                  {item.label}
+                </dt>
+                <dd className="mt-1.5 text-[13px] tracking-wide text-ink">
+                  {item.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 
@@ -150,11 +148,6 @@ export default function LandingPage() {
         <div className="flex flex-wrap items-end justify-between gap-8">
           <div className="max-w-xl">
             <SectionLabel>What we are known for</SectionLabel>
-            <h2 className="mt-6 font-display text-[clamp(2rem,4.4vw,3.2rem)]">
-              Three things people
-              <br />
-              come back <span className="display-italic">for.</span>
-            </h2>
           </div>
           <Link
             to="/menu"
@@ -232,31 +225,18 @@ export default function LandingPage() {
 
           <div>
             <SectionLabel>Our story</SectionLabel>
-            <h2 className="mt-6 font-display text-[clamp(2rem,4.4vw,3.4rem)]">
-              One room, a small
-              <br />
-              kitchen, and a <span className="display-italic">good oven.</span>
-            </h2>
-
             <div className="mt-7 space-y-4 text-[15px] leading-[1.8] text-charcoal">
               <p>
-                I opened hun. in 2026, on Bole Road, after years of drinking good
-                buna in other people's cafés and eating food that had been sitting
-                under a lamp. I wanted both to be worth the walk.
+                I opened hun. in 2026 after years of café  hunting and not finding one that actually matches me and as a student i wanted to be able to enjoy my food and also study there.
               </p>
               <p>
-                So this is a small café with a real kitchen. The coffee is
-                Yirgacheffe and Guji, roasted the week it arrives and ground when
-                you order it. Pastry is baked here in the morning, chechebsa is
-                made to order until three, and the tibs comes to the table in the
-                clay pot it was cooked in.
+                So this is a small café i created for people like me that would love to make it a comfortable and safe space to gather their thoughts and be able to actually work in that environment.
               </p>
             </div>
 
             <div className="mt-9 border-l border-gold/50 pl-6">
               <p className="display-italic text-2xl leading-snug text-plum">
-                “I wanted a place where the coffee and the food got the same
-                attention.”
+                “I wanted a place where i can sit and relax and enjoy my mornings and evenings.”
               </p>
               <p className="mt-3 text-[11px] uppercase tracking-[0.28em] text-charcoal">
                 Hanan Seid — founder
@@ -273,16 +253,8 @@ export default function LandingPage() {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <SectionLabel>The room &amp; the plates</SectionLabel>
-            <h2 className="mt-6 font-display text-[clamp(2rem,4.4vw,3.2rem)]">
-              Warm light, full tables,
-              <br />
-              and food that looks like <span className="display-italic">what it is.</span>
-            </h2>
           </div>
-          <p className="max-w-sm text-[13px] leading-relaxed text-charcoal">
-            The room at eight in the evening. The pastry case at nine in the
-            morning. Chechebsa, tibs, and whatever came out of the oven that day.
-          </p>
+          
         </div>
 
         <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
@@ -348,21 +320,17 @@ export default function LandingPage() {
 
           <div className="order-1 lg:order-2">
             <SectionLabel>Visit</SectionLabel>
-            <h2 className="mt-6 font-display text-[clamp(2rem,4.4vw,3.2rem)]">
-              Find us in <span className="display-italic">Bole.</span>
-            </h2>
+            
             <p className="mt-5 max-w-md text-[15px] leading-[1.8] text-charcoal">
-              A few minutes from Getu Commercial Center, on the ground floor of the
-              building with the fig tree at the door. There is a table for two by
-              the window; it goes first.
+              We are open everyday from 7:30am to 8:00pm, and serve pickup and dine-in.
             </p>
 
             <dl className="mt-8 divide-y divide-baby border-y border-baby text-sm">
               {[
-                { term: 'Address', detail: 'Bole Road, near Getu Commercial Center, Addis Ababa' },
+                { term: 'Address', detail: 'Addis Ababa' },
                 { term: 'Monday – Friday', detail: '7:30 — 20:00' },
                 { term: 'Saturday – Sunday', detail: '8:00 — 21:00' },
-                { term: 'Reservations', detail: '+251 91 000 0000 · hello@hun.cafe' },
+                { term: 'Reservations', detail: '+251 904665110 · hello@hun.com' },
               ].map((row) => (
                 <div key={row.term} className="flex flex-wrap justify-between gap-2 py-3.5">
                   <dt className="text-[11px] uppercase tracking-[0.2em] text-charcoal">
@@ -375,7 +343,7 @@ export default function LandingPage() {
 
             <div className="mt-8 flex flex-wrap gap-3">
               <a
-                href="https://maps.google.com/?q=Bole+Road+Addis+Ababa"
+                href="https://maps.google.com/?q=Addis+Ababa"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-ink/25 px-6 py-3 text-[11px] uppercase tracking-[0.18em] transition hover:border-ink hover:bg-blush"
@@ -402,9 +370,9 @@ export default function LandingPage() {
         />
         <p className="text-[10px] uppercase tracking-[0.4em] text-charcoal/70">hun. café</p>
         <h2 className="mx-auto mt-6 max-w-2xl font-display text-[clamp(2.1rem,5vw,3.6rem)] text-ink">
-          Come for the coffee.
+          Come for a good time.
           <br />
-          <span className="display-italic text-plum">Stay for the second cup.</span>
+          <span className="display-italic text-plum">Stay for seconds.</span>
         </h2>
         <Link
           to="/menu"
@@ -414,11 +382,11 @@ export default function LandingPage() {
           <ArrowRight className="h-3.5 w-3.5" />
         </Link>
         <p className="mt-6 text-[11px] uppercase tracking-[0.28em] text-charcoal/70">
-          Pickup · Dine-in · Priced in Birr
+          Pickup · Dine-in · Priced fairly
         </p>
       </section>
 
-      <SiteFooter />
+      <SiteFooter className={count > 0 ? 'pb-24' : ''} />
 
       {/* Cart bar */}
       {count > 0 && (
