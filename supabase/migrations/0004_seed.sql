@@ -1,12 +1,8 @@
--- hun. — demo tenant, café menu, payment methods and the dashboard account.
+-- hun. — demo tenant, menu catalogue, payment methods and the dashboard account.
 -- This is the only seed data: it is real data in real tables, not fixture code
 -- in the application.
 --
--- Prices are in santim (1 Birr = 100 santim), so 9000 is Br 90.00. They are
--- ordinary Addis Ababa café prices for 2026 and can be changed from the
--- dashboard without touching this file.
--- Every image is a real photograph of the thing it labels, stored under
--- public/images/menu/ — see docs/photography.md for the source of each one.
+-- Prices are in santim (1 Birr = 100 santim), so 12000 is Br 120.00.
 -- The bank and wallet details below are placeholders — replace them with the
 -- café's own merchant numbers before taking a real payment.
 
@@ -14,7 +10,7 @@ insert into public.restaurants (slug, name, tagline, currency, status, ordering_
 values (
   'hun-cafe',
   'hun.',
-  'A café in Bole, Addis Ababa. Coffee, tea, pastries, and a room worth sitting in.',
+  'A café in Bole, Addis Ababa. Coffee, chechebsa, and a room worth sitting in.',
   'ETB',
   'active',
   true,
@@ -28,12 +24,10 @@ insert into public.categories (restaurant_id, name, tagline, image_url, sort_ord
 select r.id, c.name, c.tagline, c.image_url, c.sort_order
 from public.restaurants r
 cross join (values
-  ('Coffee', 'Ethiopian coffee, ground when you order', '/images/menu/latte.jpg', 10),
-  ('Tea', 'Poured by the glass, all day', '/images/menu/mint-tea.jpg', 20),
-  ('Cold Drinks', 'Over ice, for the long afternoons', '/images/menu/iced-latte.jpg', 30),
-  ('Fresh Juice', 'Pressed after you ask', '/images/menu/mango-juice.jpg', 40),
-  ('Pastries', 'Baked here before the doors open', '/images/menu/croissant.jpg', 50),
-  ('Cakes & Desserts', 'Cut thick, straight from the case', '/images/menu/cheesecake.jpg', 60)
+  ('Coffee & Tea', 'Ethiopian coffee, ground and brewed to order', '/images/img-36.jpg', 10),
+  ('Pastry', 'Baked here before the shutters go up', '/images/img-24.jpg', 20),
+  ('Breakfast', 'Served from 7:30 until three in the afternoon', '/images/chechebsa.jpg', 30),
+  ('Lunch', 'Plates from the afternoon kitchen', '/images/tibs.jpg', 40)
 ) as c(name, tagline, image_url, sort_order)
 where r.slug = 'hun-cafe';
 
@@ -47,74 +41,28 @@ select r.id, c.id, i.name, i.description, i.price_minor, i.image_url, i.featured
 from public.restaurants r
 join public.categories c on c.restaurant_id = r.id
 cross join (values
-  -- Coffee
-  ('Coffee', 'Espresso', 'One shot, in a small cup. Best drunk standing at the bar.', 9000, '/images/menu/espresso.jpg', false, 10),
-  ('Coffee', 'Macchiato', 'Espresso with a spoon of steamed milk. The one most of Addis orders.', 8500, '/images/menu/macchiato.jpg', false, 20),
-  ('Coffee', 'Cappuccino', 'Equal parts coffee, milk and foam, dusted with cocoa.', 15000, '/images/menu/cappuccino.jpg', false, 30),
-  ('Coffee', 'Caffè Latte', 'A long pour of steamed milk over a double shot.', 16000, '/images/menu/latte.jpg', true, 40),
-  ('Coffee', 'Flat White', 'Stronger than a latte, less foam, finished with a thin layer of milk.', 16000, '/images/menu/flat-white.jpg', false, 50),
-  ('Coffee', 'Cortado', 'Equal parts espresso and warm milk, in a small glass.', 13000, '/images/menu/cortado.jpg', false, 60),
-  ('Coffee', 'Americano', 'A double shot with hot water. Nothing else.', 12000, '/images/menu/americano.jpg', false, 70),
-  ('Coffee', 'Caffè Mocha', 'Espresso, chocolate and steamed milk, with cocoa on top.', 18000, '/images/menu/mocha.jpg', false, 80),
-  ('Coffee', 'Sini Buna', 'Coffee brewed in the jebena and poured into the small cup, with a sprig of rue.', 7000, '/images/menu/buna.jpg', false, 90),
-  ('Coffee', 'Jebena Buna for Two', 'A full jebena brought to the table with two cups, sugar and rue.', 16000, '/images/menu/jebena.jpg', true, 100),
-  ('Coffee', 'V60 Pour Over', 'Single origin, ground when you order and poured by hand. Ask what is open today.', 22000, '/images/menu/v60.jpg', false, 110),
-  ('Coffee', 'Chemex for Two', 'A slower brew for a slower morning. Served in two cups.', 28000, '/images/menu/chemex.jpg', false, 120),
-
-  -- Tea
-  ('Tea', 'Black Tea', 'Loose leaf, brewed strong, served with sugar on the side.', 6000, '/images/menu/black-tea.jpg', false, 10),
-  ('Tea', 'Ethiopian Shai', 'Black tea with cinnamon and clove, the way it is made at home.', 7000, '/images/menu/shai.jpg', false, 20),
-  ('Tea', 'Mint Tea', 'Fresh mint steeped in hot water, honey on the side.', 9000, '/images/menu/mint-tea.jpg', false, 30),
-  ('Tea', 'Green Tea', 'Light and clean, brewed at a lower temperature so it stays sweet.', 8000, '/images/menu/green-tea.jpg', false, 40),
-  ('Tea', 'Chai Latte', 'Spiced black tea with steamed milk and a little honey.', 16000, '/images/menu/chai-latte.jpg', false, 50),
-  ('Tea', 'Karkade', 'Hibiscus petals steeped and served cold or hot. Tart and deep red.', 10000, '/images/menu/hibiscus.jpg', false, 60),
-  ('Tea', 'Ginger & Lemon Tea', 'Fresh ginger, lemon and honey. Good for a sore throat.', 11000, '/images/menu/ginger-lemon.jpg', false, 70),
-  ('Tea', 'Earl Grey', 'Bergamot black tea, served with a slice of lemon.', 7000, '/images/menu/earl-grey.jpg', false, 80),
-
-  -- Cold Drinks
-  ('Cold Drinks', 'Iced Latte', 'Two shots poured over cold milk and ice.', 19000, '/images/menu/iced-latte.jpg', true, 10),
-  ('Cold Drinks', 'Cold Brew', 'Steeped for eighteen hours, served over ice. Smooth, no bitterness.', 20000, '/images/menu/cold-brew.jpg', false, 20),
-  ('Cold Drinks', 'Iced Americano', 'A double shot, cold water and ice. The lightest way to have coffee.', 15000, '/images/menu/iced-americano.jpg', false, 30),
-  ('Cold Drinks', 'Iced Tea', 'Black tea chilled with lemon and a little sugar.', 13000, '/images/menu/iced-tea.jpg', false, 40),
-  ('Cold Drinks', 'Lemonade', 'Lemons squeezed to order, sugar and cold water.', 14000, '/images/menu/lemonade.jpg', false, 50),
-  ('Cold Drinks', 'Mint Lemonade', 'Lemonade with mint pressed into the glass.', 16000, '/images/menu/mint-lemonade.jpg', false, 60),
-  ('Cold Drinks', 'Coffee Frappé', 'Cold coffee blended with ice and milk, whipped until foamy.', 20000, '/images/menu/frappe.jpg', false, 70),
-  ('Cold Drinks', 'Iced Mocha', 'Chocolate, espresso and cold milk over ice, with cream on top.', 20000, '/images/menu/iced-mocha.jpg', false, 80),
-  ('Cold Drinks', 'Sparkling Water', 'A chilled bottle and a glass with lemon.', 8000, '/images/menu/sparkling.jpg', false, 90),
-
-  -- Fresh Juice
-  ('Fresh Juice', 'Mango Juice', 'Ripe mango blended thick. No water added.', 18000, '/images/menu/mango-juice.jpg', false, 10),
-  ('Fresh Juice', 'Avocado Juice', 'Avocado blended with a little lime and sugar. Thick enough for a spoon.', 19000, '/images/menu/avocado-juice.jpg', false, 20),
-  ('Fresh Juice', 'Papaya Juice', 'Papaya blended smooth, served very cold.', 17000, '/images/menu/papaya-juice.jpg', false, 30),
-  ('Fresh Juice', 'Fresh Orange Juice', 'Oranges pressed when you order.', 15000, '/images/menu/orange-juice.jpg', false, 40),
-  ('Fresh Juice', 'Passion Fruit Juice', 'Passion fruit, seeds strained out, sharp and sweet.', 17000, '/images/menu/passion-juice.jpg', false, 50),
-  ('Fresh Juice', 'Beetroot Juice', 'Beetroot with apple and a squeeze of lime.', 18000, '/images/menu/beetroot-juice.jpg', false, 60),
-  ('Fresh Juice', 'Watermelon Juice', 'Watermelon blended with ice, nothing else.', 16000, '/images/menu/watermelon-juice.jpg', false, 70),
-  ('Fresh Juice', 'Pineapple Juice', 'Pineapple blended and strained, with mint if you like.', 17000, '/images/menu/pineapple-juice.jpg', false, 80),
-
-  -- Pastries
-  ('Pastries', 'Butter Croissant', 'Laminated with butter and rested overnight, baked before we open.', 17000, '/images/menu/croissant.jpg', false, 10),
-  ('Pastries', 'Almond Croissant', 'Yesterday''s croissant filled with almond cream and baked again with flaked almonds.', 22000, '/images/menu/almond-croissant.jpg', true, 20),
-  ('Pastries', 'Pain au Chocolat', 'Two batons of dark chocolate in a butter-laminated dough.', 19000, '/images/menu/pain-au-chocolat.jpg', false, 30),
-  ('Pastries', 'Cinnamon Roll', 'Rolled with cinnamon sugar and finished with a thin glaze.', 20000, '/images/menu/cinnamon-roll.jpg', false, 40),
-  ('Pastries', 'Blueberry Muffin', 'Baked with blueberries and a little lemon zest.', 16000, '/images/menu/blueberry-muffin.jpg', false, 50),
-  ('Pastries', 'Buttermilk Scone', 'Plain and crumbly, with butter and jam on the side.', 15000, '/images/menu/scone.jpg', false, 60),
-  ('Pastries', 'Cheese Danish', 'Sweet pastry with a centre of soft cheese.', 19000, '/images/menu/danish.jpg', false, 70),
-  ('Pastries', 'Banana Bread', 'A thick slice, warmed if you ask.', 17000, '/images/menu/banana-bread.jpg', false, 80),
-  ('Pastries', 'Chocolate Brownie', 'Dense, a little salty, with walnuts.', 18000, '/images/menu/brownie.jpg', false, 90),
-  ('Pastries', 'Chocolate Chip Cookie', 'Chewy in the middle, baked in the morning.', 10000, '/images/menu/cookie.jpg', false, 100),
-  ('Pastries', 'Sesame Bagel', 'Boiled then baked, with sesame on top. Butter or cream cheese.', 14000, '/images/menu/bagel.jpg', false, 110),
-  ('Pastries', 'Lemon Pound Cake', 'A slice of the loaf we keep under glass by the till.', 17000, '/images/menu/pound-cake.jpg', false, 120),
-
-  -- Cakes & Desserts
-  ('Cakes & Desserts', 'Cheesecake', 'Baked vanilla cheesecake on a biscuit base.', 26000, '/images/menu/cheesecake.jpg', true, 10),
-  ('Cakes & Desserts', 'Carrot Cake', 'Carrot, walnut and spice with cream cheese frosting.', 24000, '/images/menu/carrot-cake.jpg', false, 20),
-  ('Cakes & Desserts', 'Chocolate Cake', 'Dark chocolate sponge with a thick chocolate ganache.', 25000, '/images/menu/chocolate-cake.jpg', false, 30),
-  ('Cakes & Desserts', 'Tiramisu', 'Coffee-soaked sponge, mascarpone and cocoa. Made in the morning.', 28000, '/images/menu/tiramisu.jpg', false, 40),
-  ('Cakes & Desserts', 'Baklava', 'Layers of filo with walnuts and honey syrup.', 18000, '/images/menu/baklava.jpg', false, 50),
-  ('Cakes & Desserts', 'Affogato', 'A scoop of vanilla ice cream with a shot of hot espresso poured over it.', 22000, '/images/menu/affogato.jpg', false, 60),
-  ('Cakes & Desserts', 'Macarons', 'Three, from whatever colours we made this week.', 15000, '/images/menu/macaron.jpg', false, 70),
-  ('Cakes & Desserts', 'Fruit Tart', 'Shortcrust, vanilla cream and the fruit of the season.', 24000, '/images/menu/fruit-tart.jpg', false, 80)
+  -- Coffee & Tea
+  ('Coffee & Tea', 'Macchiato', 'Two shots and a spoon of steamed milk in a small glass. The one we drink standing up.', 7000, '/images/img-36.jpg', true, 10),
+  ('Coffee & Tea', 'Sini Buna', 'Coffee brewed in the jebena and poured into the small cup, with a sprig of rue.', 8000, '/images/buna.jpg', false, 20),
+  ('Coffee & Tea', 'Yirgacheffe Filter', 'Washed Yirgacheffe, ground when you order and poured by hand. Jasmine and bergamot.', 18000, '/images/img-03.jpg', false, 30),
+  ('Coffee & Tea', 'Honey Oat Latte', 'Oat milk, wildflower honey, a pinch of salt.', 20000, '/images/img-33.jpg', false, 40),
+  ('Coffee & Tea', 'Cold Brew Tonic', 'Eighteen-hour cold brew, tonic and orange peel over ice.', 22000, '/images/img-05.jpg', false, 50),
+  -- Pastry
+  ('Pastry', 'Butter Croissant', 'Butter, folded and rested overnight, baked before we open.', 15000, '/images/img-11.jpg', false, 10),
+  ('Pastry', 'From the Pastry Case', 'Whatever came out of the oven this morning. Ask what is still warm.', 18000, '/images/img-24.jpg', false, 20),
+  ('Pastry', 'Sourdough Loaf', 'Country loaf, dark crust, open crumb. Whole or sliced.', 22000, '/images/img-12.jpg', false, 30),
+  -- Breakfast
+  ('Breakfast', 'Chechebsa', 'Kita torn by hand, warmed in niter kibbeh and berbere, honey on the side.', 26000, '/images/chechebsa.jpg', true, 10),
+  ('Breakfast', 'Avocado & Egg Toast', 'Sourdough, avocado, two boiled eggs, chilli and lemon.', 34000, '/images/img-23.jpg', false, 20),
+  ('Breakfast', 'Buttermilk Pancakes', 'A stack with banana, honey and mint. Made to share, rarely shared.', 34000, '/images/img-17.jpg', false, 30),
+  ('Breakfast', 'French Toast', 'Thick-cut bread soaked overnight, griddled, with banana and blueberry.', 36000, '/images/img-15.jpg', false, 40),
+  ('Breakfast', 'Fresh Orange Juice', 'Oranges pressed when you order. Nothing added.', 14000, '/images/img-34.jpg', false, 50),
+  -- Lunch
+  ('Lunch', 'Beef Tibs', 'Beef cut small and seared with rosemary, onion and green chilli, served in a clay pot with rolled injera.', 48000, '/images/tibs.jpg', true, 10),
+  ('Lunch', 'Chicken & Potato Pizza', 'Thin base, chicken, potato, red onion, coriander. One between two.', 52000, '/images/img-29.jpg', false, 20),
+  ('Lunch', 'Crisp Tofu Bowl', 'Golden tofu, egg, sweetcorn, red cabbage and tomato with sesame dressing.', 42000, '/images/img-13.jpg', false, 30),
+  ('Lunch', 'Chicken Burger & Fries', 'Buttermilk-fried chicken, pickles, slaw and a basket of fries.', 44000, '/images/img-28.jpg', false, 40),
+  ('Lunch', 'Avocado & Chickpea Bowl', 'Avocado, chickpeas, roast sweet potato and leaves, lemon dressing.', 40000, '/images/img-14.jpg', false, 50)
 ) as i(cat, name, description, price_minor, image_url, featured, sort_order)
 where r.slug = 'hun-cafe' and c.name = i.cat;
 

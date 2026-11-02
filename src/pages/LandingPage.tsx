@@ -69,7 +69,7 @@ export default function LandingPage() {
               </h1>
 
               <p className="mt-6 max-w-md text-[15px] leading-[1.75] text-charcoal">
-                A small café in Addis Ababa, opened in 2026 by Hanan Seid. An adictive coffee with side of sweet or sour treats based on your likes.
+                A small café in Addis Ababa, opened in 2026 by Hanan Seid. An addictive coffee with a side of sweet or sour treats based on your likes.
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-3">
