@@ -1,6 +1,6 @@
 # Brand and design system
 
-**Status:** Provisional. Colours and typography are design recommendations, not installed dependencies.
+**Status:** Implemented. The palette and type are installed in the app (`src/index.css`, Tailwind theme tokens); the tokens there are the source of truth and supersede the hex values below where they differ.
 
 ## Wordmark
 

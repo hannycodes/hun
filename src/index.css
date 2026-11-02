@@ -1,0 +1,171 @@
+/* Brand type is bundled with the app (SIL Open Font License) so the site never
+   depends on a third-party font CDN at runtime. Fraunces carries the print-like
+   serif voice; Jost is its quiet geometric companion. */
+@import "@fontsource-variable/fraunces/full.css";
+@import "@fontsource-variable/fraunces/full-italic.css";
+@import "@fontsource-variable/jost/index.css";
+@import "tailwindcss";
+
+@theme {
+  /* Palette — docs/brand.md. Pink and gold are surfaces and decoration;
+     all text sits on ink or charcoal so contrast stays comfortable. */
+  --color-ink: #241a20;
+  --color-plum: #40222f;
+  --color-baby: #f7dee6;
+  --color-blush: #fbebf1;
+  --color-paper: #fffdfb;
+  --color-rose: #b58394;
+  --color-gold: #b08d57;
+  --color-charcoal: #5f5359;
+
+  --font-display: "Fraunces Variable", Georgia, "Times New Roman", serif;
+  --font-sans: "Jost Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --radius-arch: 999px 999px 28px 28px;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    line-height: 1.02;
+    font-variation-settings: "SOFT" 40, "WONK" 1, "opsz" 96;
+  }
+
+  ::selection {
+    background: var(--color-baby);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+@layer utilities {
+  /* Fine editorial label used above headings and for metadata. */
+  .eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--color-charcoal);
+  }
+
+  .eyebrow-gold {
+    color: var(--color-gold);
+  }
+
+  /* Fraunces italic is the brand's voice for a single emphasised word. */
+  .display-italic {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-variation-settings: "SOFT" 60, "WONK" 1, "opsz" 96;
+  }
+
+  .hairline {
+    border-color: color-mix(in srgb, var(--color-baby) 80%, var(--color-gold));
+  }
+
+  .arch {
+    border-radius: 999px 999px 20px 20px;
+  }
+
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.16;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+  }
+
+  .fade-in {
+    animation: fade-in 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .rise-in {
+    animation: rise-in 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .marquee-track {
+    animation: marquee 42s linear infinite;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in,
+  .rise-in,
+  .marquee-track {
+    animation: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}

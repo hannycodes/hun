@@ -73,7 +73,7 @@ Proposed, pending ADR-0009:
 | Transport | TLS everywhere; HSTS on public surfaces |
 | At rest | Database and backups encrypted at the storage level by the hosting provider (to be confirmed) |
 | Backups | Automated, access-controlled, restore tested before real data is held |
-| Payment data | Out of scope for MVP. If payments are added, use a certified provider so card data never touches hun's systems |
+| Payment data | Transfers are matched by hand: the café never stores card numbers, PINs or wallet credentials. Only the transaction reference, payer name and optional phone are kept, scoped to the restaurant. A certified provider is required before any card or direct-debit flow |
 | Logs | Structured; request and tenant identifiers; no secrets or personal data |
 
 ## Application security checklist
